@@ -1,0 +1,10 @@
+query GET_USER_PROFILE_ID_BY_USER_ID($id: String) {
+  user_profiles(where: { id: { eq: $id }, is_active: { eq: true } }) {
+    id
+    first_name
+    user_id
+    last_name
+    get_assets_url_id:image_url
+    email_id
+  }
+}
