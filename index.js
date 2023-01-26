@@ -1,7 +1,7 @@
 
 import express from "express";
 import PgPool from "pg-pool"
-import { loadAllTenants } from "./loadTenants.js";
+import { loadAllTenants,getConnection } from "./loadTenants.js";
 import dotenv from "dotenv";
 
 const app = express();
@@ -29,8 +29,11 @@ app.use(express.json())
 app.use(async(req, resp,next)=>{
     const slug = req.headers['slug']
     if(!slug) return resp.status(403).send({message:"Please check your Connection Slug !"})
-    if(!graphContext[slug]) return resp.status(406).send({message:"Invalid Tenant !"})
-    req.body.supergraph = graphContext[slug] 
+
+    const supergraph = await getConnection(slug)
+
+    if(!supergraph) return resp.status(406).send({message:"Invalid Tenant !"})
+    req.body.supergraph = supergraph
     next()
 })
 
