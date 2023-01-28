@@ -1,0 +1,147 @@
+uery GET_PROPERTY_DETAILS_BY_ID($id: [String]) {
+  property(where: { id: { in: $id } }) {
+    unit_count: unit {
+      count_id
+      __typename
+    }
+    floor_count: floor {
+      count_id
+      __typename
+    }
+    block_count: block {
+      count_id
+      __typename
+    }
+    id
+    logo
+    is_block
+    is_floor
+    property_no
+    name
+    pet_policy
+    is_asset_property
+    is_community
+    property_hierarchyByID {
+      value: id
+      label: name
+      is_block
+      is_floor
+      is_unit
+      is_multi_unit
+      is_customisable
+      property_hierarchy_labelByID {
+        id
+        floor_label
+        block_label
+      }
+    }
+    set_back_area
+    is_asset_functional_location
+    uomByID {
+      value: id
+      label: name
+    }
+    swimming_pools
+    discussion_forum
+    elevators
+    amenities_booking
+    area_metric
+    property_purpose
+    property_hierarchy
+    description
+    revenue_type
+    municipality_authority
+    electrical_water_authority
+    util_gas_connection
+    smart_geographic_addressing
+    util_water_connection
+    util_electricity_connection
+    company {
+      id
+      name
+      value: id
+      label: name
+      currency {
+        id
+        symbol
+      }
+      __typename
+    }
+    property_group_id
+    property_groupByID {
+      id
+      group_name
+      __typename
+    }
+    payment_period
+    is_active
+    description
+    revenue_type
+    carpet_area
+    total_area
+    year_built
+    planned_hand_over_date
+    is_listing
+    is_pet_allowed
+    address {
+      id
+      door_no
+      street_1
+      street_2
+      street_3
+      landmark
+      area
+      city
+      district
+      state
+      country
+      zipcode
+      latitude
+      longitude
+      __typename
+    }
+    business_phone_country_code
+    business_phone
+    mobile_country_code
+    mobile_phone
+    website
+    email
+    ownerByID: contact_accountByID {
+      id
+      name
+      account_no
+      company_id
+      logo
+      email_id
+      mobile_no
+      mobile_no_country_code
+      contact {
+        id
+        first_name
+        last_name
+        image_url
+        mobile_no
+        mobile_no_country_code
+        email_id
+      }
+    }
+    __typename
+  }
+  property_assets(
+    where: { property_id: { in:  $id }, is_active: { eq: true } }
+  ) {
+    id
+    url
+    priority
+    asset_type
+  }
+  team_property_access(
+    where: { property_id: { in: $id }, is_active: { eq: true } }
+  ) {
+    id
+    teams {
+      id
+      name
+    }
+  }
+}
